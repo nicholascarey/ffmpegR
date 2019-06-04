@@ -13,4 +13,6 @@ trim <- function(file,
                  from = NULL,
                  to = NULL){
 
+  cmd
+
 }
