@@ -15,7 +15,7 @@
 #'   uses current working directory.
 #' @param file string. Name of file in `dir` or current working directory.
 #' @param output string. Name of new file, without filetype extension. If left
-#'   NULL called "output" with appropriate filetype extension.
+#'   NULL output is named same as the original file appended with `_trim`.
 #' @param from string. Time into trim from in hh:mm:ss format.
 #' @param to string Time to trim to in hh:mm:ss format.
 #'

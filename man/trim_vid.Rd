@@ -14,7 +14,7 @@ trim_vid(file = NULL, dir = NULL, output = NULL, from = NULL,
 uses current working directory.}
 
 \item{output}{string. Name of new file, without filetype extension. If left
-NULL called "output" with appropriate filetype extension.}
+NULL output is named same as the original file appended with `_trim`.}
 
 \item{from}{string. Time into trim from in hh:mm:ss format.}
 
