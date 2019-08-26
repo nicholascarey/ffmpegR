@@ -92,7 +92,8 @@ trim_vid <- function(file = NULL,
 
   ## if timestamp, calculate time diff in s and use this in ffmpeg command
   if(!is.numeric(to)) to_cmd <- as.numeric(difftime(lubridate::parse_date_time(to, orders = "HMS"),
-                                                    lubridate::parse_date_time(from, orders = "HMS")))
+                                                    lubridate::parse_date_time(from, orders = "HMS"),
+                                                    units = "secs"))
 
 
   # Build system command ----------------------------------------------------
