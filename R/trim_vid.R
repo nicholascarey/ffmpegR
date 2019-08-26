@@ -2,6 +2,10 @@
 #'
 #' Trims a movie file to the given `from` and `to` timepoints.
 #'
+#' The `from` must be a string in "HH:MM:SS" format. The `to` can either be a
+#' string in the same format (the timestamp to trim to), or a numeric value in
+#' seconds (file will be trimmed to this point after the from timestamp).
+#'
 #' Either have the file in the current working directory, or specify the
 #' location with `dir`, in which case the working directory is unchanged.
 #'
@@ -17,7 +21,8 @@
 #' @param output string. Name of new file, without filetype extension. If left
 #'   NULL output is named same as the original file appended with `_trim`.
 #' @param from string. Time into trim from in hh:mm:ss format.
-#' @param to string Time to trim to in hh:mm:ss format.
+#' @param to string or numeric. Either the time to trim to in hh:mm:ss format,
+#'   or numeric time in s to trim to after 'from' time.
 #'
 #' @importFrom glue glue
 #' @export
@@ -38,11 +43,11 @@ trim_vid <- function(file = NULL,
                      to = NULL){
 
 
-# Input checks ------------------------------------------------------------
+  # Input checks ------------------------------------------------------------
 
-    ## check to greater than from?
+  ## check to greater than from?
 
-# Set and restore working directory ---------------------------------------
+  # Set and restore working directory ---------------------------------------
 
   ## set working directory if entered
 
@@ -78,6 +83,18 @@ trim_vid <- function(file = NULL,
   if(is.null(output)) output <- gsub(ext, "", file)
 
 
+  # Parse 'to' input --------------------------------------------------------
+
+  ## ffmpeg `to` -t input is time in s after from to trim
+
+  ## if numeric time in s, easy enough
+  if(is.numeric(to)) to_cmd <- to
+
+  ## if timestamp, calculate time diff in s and use this in ffmpeg command
+  if(!is.numeric(to)) to_cmd <- as.numeric(difftime(lubridate::parse_date_time(to, orders = "HMS"),
+                                                    lubridate::parse_date_time(from, orders = "HMS")))
+
+
   # Build system command ----------------------------------------------------
 
   ## build ffmpeg command on OS specific basis
@@ -85,14 +102,14 @@ trim_vid <- function(file = NULL,
   if(os() == "mac"){
     message("Trimming movie...")
     instruction_string <-
-      glue('ffmpeg -y -i ', file, ' -c copy -ss ', from, ' -t ', to, " ", output, "_trim", ext)
+      glue('ffmpeg -y -i ', file, ' -c copy -ss ', from, ' -t ', to_cmd, " ", output, "_trim", ext)
 
     ## run the command
     system(instruction_string)
 
-  ## For other OS
-  ## No plans to, but might implement Windows/Linux at a future date if someones
-  ## asks
+    ## For other OS
+    ## No plans to, but might implement Windows/Linux at a future date if someones
+    ## asks
   } else if(os() != "mac"){
     stop("This OS not yet supported.")
   }
