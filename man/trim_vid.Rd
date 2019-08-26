@@ -5,10 +5,10 @@
 \title{join_vid}
 \usage{
 trim_vid(file = NULL, dir = NULL, output = NULL, from = NULL,
-  to = NULL)
+  to = NULL, remove_audio = FALSE)
 
 trim_vid(file = NULL, dir = NULL, output = NULL, from = NULL,
-  to = NULL)
+  to = NULL, remove_audio = FALSE)
 }
 \arguments{
 \item{file}{string. Name of file in `dir` or current working directory.}
@@ -23,6 +23,8 @@ NULL named same as the FIRST file, appended with `_join`}
 
 \item{to}{string or numeric. Either the time to trim to in hh:mm:ss format,
 or numeric time in s to trim to after 'from' time.}
+
+\item{remove_audio}{logical. If TRUE audio is removed from the copy.}
 
 \item{file1}{string. Name of first file in `dir` or current working directory.}
 

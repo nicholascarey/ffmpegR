@@ -23,6 +23,7 @@
 #' @param from string. Time into trim from in hh:mm:ss format.
 #' @param to string or numeric. Either the time to trim to in hh:mm:ss format,
 #'   or numeric time in s to trim to after 'from' time.
+#' @param remove_audio logical. If TRUE audio is removed from the copy.
 #'
 #' @importFrom glue glue
 #' @export
@@ -40,7 +41,8 @@ trim_vid <- function(file = NULL,
                      dir = NULL,
                      output = NULL,
                      from = NULL,
-                     to = NULL){
+                     to = NULL,
+                     remove_audio = FALSE){
 
 
   # Input checks ------------------------------------------------------------
@@ -96,6 +98,10 @@ trim_vid <- function(file = NULL,
                                                     units = "secs"))
 
 
+  # Remove audio ------------------------------------------------------------
+
+  ifelse(remove_audio, rma <- "-an", rma <- "")
+
   # Build system command ----------------------------------------------------
 
   ## build ffmpeg command on OS specific basis
@@ -103,7 +109,7 @@ trim_vid <- function(file = NULL,
   if(os() == "mac"){
     message("Trimming movie...")
     instruction_string <-
-      glue('ffmpeg -y -i ', file, ' -c copy -ss ', from, ' -t ', to_cmd, " ", output, "_trim", ext)
+      glue('ffmpeg -y -i ', file, ' -c copy ', rma, ' -ss ', from, ' -t ', to_cmd, " ", output, "_trim", ext)
 
     ## run the command
     system(instruction_string)
