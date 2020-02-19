@@ -16,23 +16,20 @@ knitr::opts_chunk$set(
 
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-These are functions to do common video editing operations in ffmpeg through R. 
-Created these simply because I find lack of normal text entry and editing in the 
-terminal frustrating. I'm sure there's other text editors that will do this, but 
-sometimes I just want to do them through R. 
+These are functions to do common video editing operations in [ffmpeg](ffmpeg.org) through R. 
 
 Works on macOS only for now. Windows support wouldn't be difficult to add, and 
 I'll consider it if anyone shows some interest. 
 
 ### Installation
 
-```r
-devtools::install_github("nicholascarey/loomeR")
+```{r eval = F}
+devtools::install_github("nicholascarey/ffmpegR")
 ```
 
 ### Functions
 
-Currently there is one function:
+Currently there are three functions:
 
 #### `trim_vid`
 
@@ -45,3 +42,29 @@ Simply trims a video between two timepoints.
           from = "00:02:45", # trim from here...
           to = "00:09:15") # ...to here
 ```
+
+#### `join_vid`
+
+Joins two videos together into one file. 
+
+```{r eval = F}
+join_vid(dir = "path/to/directory", # working directory
+         file1 = "input_file_1.mp4", # file 1
+         file2 = "input_file_2.mp4", # file 2 
+         output = "output") # name of output file
+```
+
+#### `remove_fisheye`
+
+Removes the 'fisheye' effect from GoPro Hero 5 Black videos (other models to follow....)
+
+```{r eval = F}
+ remove_fisheye(file = "path/to/file", # input
+                dir = "path/to/dir", # directory
+                output = "output", # output
+                remove_audio = FALSE) # remove the audio?
+```
+
+
+
+

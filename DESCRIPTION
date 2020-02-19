@@ -5,10 +5,6 @@ Version: 0.1.0
 Author: Nicholas Carey
 Maintainer: Nicholas Carey <nicholascarey@gmail.com>
 Description: Some functions to do common video editing operations in ffmpeg through R. 
-    Created these simply because I find lack of normal text entry and editing in the 
-    terminal frustrating, and sometimes I just want to do it through R. Works on macOS 
-    only for now. Windows support wouldn't be difficult to add, and I'll consider it if 
-    anyone shows some interest. 
 License: GPL-3
 Encoding: UTF-8
 URL: https://github.com/nicholascarey/ffmpegR

@@ -16,11 +16,10 @@
 #' @examples
 #' # Commented out because we don't want package checks to actually run this
 #' #
-#' # trim_vid(dir = "path/to/directory",
-#' #          file = "input_file.mp4",
-#' #          output = "output",
-#' #          from = "00:02:45",
-#' #          to = "00:09:15")
+#' # remove_fisheye(file = "path/to/file",
+#' #                dir = "path/to/dir",
+#' #                output = "output",
+#' #                remove_audio = FALSE)
 
 ## To do
 ## Customisation of the parameters - gotta be a database somewhere of different settings

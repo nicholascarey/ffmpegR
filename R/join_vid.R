@@ -28,7 +28,7 @@
 #' @examples
 #' # Commented out because we don't want package checks to actually run this
 #' #
-#' # trim_vid(dir = "path/to/directory",
+#' # join_vid(dir = "path/to/directory",
 #' #          file1 = "input_file_1.mp4",
 #' #          file2 = "input_file_2.mp4",
 #' #          output = "output")
